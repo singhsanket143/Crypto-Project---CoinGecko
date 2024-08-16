@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "react-query";
-import currencyStore from '../../state/store';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
+import useStore from '../../state/store.js';
+
 
 function CoinTable() {
-    const { currency } = currencyStore();
-    const [page, setPage] = useState(1);
-    const [coins, setCoins] = useState([]);
+    const { currency, setCurrency, coins, setCoin, page, setPage, pageInc } = useStore()
+    // const [coins, setCoins] = useState([]);
 
     const { data, isLoading, isError, error } = useQuery(
         ['coins', page, currency],
@@ -21,7 +22,7 @@ function CoinTable() {
 
     useEffect(() => {
         if (data) {
-            setCoins(prevCoins => prevCoins.concat(data));
+            setCoin(data);
 
         }
     }, [data]);
@@ -31,7 +32,7 @@ function CoinTable() {
     }
 
     const fetchMoreData = () => {
-        setPage((prevPage) => prevPage + 1);
+        pageInc()
     };
 
     return (
