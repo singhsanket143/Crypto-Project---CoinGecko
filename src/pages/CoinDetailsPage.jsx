@@ -4,6 +4,8 @@ import { fetchCoinDetails } from "../services/fetchCoinDetails";
 import currencyStore from '../state/store';
 import parse from 'html-react-parser';
 import PageLoader from "../components/PageLoader/PageLoader";
+import { fetchHistoricalPrice } from "../services/fetchHistoricalPrice";
+import LineGraph from "../components/LineGraph/LineGraph";
 
 
 function CoinDetailsPage() {
@@ -15,6 +17,11 @@ function CoinDetailsPage() {
         cacheTime: 1000 * 60 * 2,
         staleTime: 1000 * 60 * 2,
     });
+
+    const {data: historicalData} = useQuery(['historical', coinId, currency], () => fetchHistoricalPrice(coinId, currency), {
+        cacheTime: 1000 * 60 * 2,
+        staleTime: 1000 * 60 * 2,
+    })
 
     if(isLoading) {
         return <PageLoader />
@@ -74,8 +81,8 @@ function CoinDetailsPage() {
                 </div>
             </div>
 
-            <div className="md:w-2/3 w-full p-6">
-                Coin Information
+            <div className="md:w-2/3 w-full p-10">
+                <LineGraph dataArray={historicalData} />
             </div>
 
         </div>
