@@ -1,0 +1,16 @@
+
+@keyframes searchReavel {
+    from{
+        transform: scaleX(0);
+    }
+    to{
+        transform: scaleX(1);
+    }
+}
+
+.searchBox{
+    animation-name: searchReavel;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
