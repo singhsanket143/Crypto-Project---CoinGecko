@@ -5,7 +5,7 @@ import useFetchCoinHistory from "../../hooks/useFetchCoinHistory";
 
 function CoinInfoContainer({ coinId }) {
 
-    const [ historicData, isError, isLoading, currency, days, setDays, setCoinInterval] = useFetchCoinHistory(coinId);
+    const { historicData, isError, isLoading, currency, days, setDays, setCoinInterval } = useFetchCoinHistory(coinId);
 
     if(isLoading) {
         return <PageLoader />
