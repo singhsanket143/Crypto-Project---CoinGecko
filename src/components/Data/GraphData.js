@@ -15,18 +15,15 @@ export function GraphData(dataArray){
     })
 
     priceData.pop()
-    console.log(priceData)
+    
+    let market_CapData = dataArray?.market_caps.map((item) => {
+        return item[1]
+    })
 
+    market_CapData.pop()
 
     return {
-        labels: timeData,
-        datasets:[
-            {
-                label: "Price",
-                data: priceData,
-                borderColor: ['#fb8500', '#2a9d8f'],
-            }
-        ]
+        timeData, priceData, market_CapData
     }
 }
 
