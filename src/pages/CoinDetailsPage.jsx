@@ -40,13 +40,13 @@ function CoinDetailsPage() {
           {parse(coin?.description?.en)}
         </p>
 
-        <div className="w-full flex flex-col md:flex-row md:justify-around">
-          <div className="flex items-center mb-4 md:mb-0">
+        <div className="w-full flex  flex-col md:flex-row md:justify-around">
+          <div className="flex items-center mb-4 md:mb-0 justify-center md:justify-start ">
             <h2 className="text-xl font-bold ">Rank</h2>
             <span className="ml-3 text-xl ">{coin?.market_cap_rank}</span>
           </div>
 
-          <div className="flex items-center mb-4 md:mb-0">
+          <div className="flex items-center justify-center md:justify-start mb-4 md:mb-0">
             <h2 className="text-xl text-yellow-400 font-bold ">
               Current Price
             </h2>
@@ -57,7 +57,7 @@ function CoinDetailsPage() {
         </div>
       </div>
 
-      <div className="md:w-2/3 w-full p-6">
+      <div className="md:w-2/3 w-full p-3 md:p-6">
         <CoinDashboard
           coinId={coinId}
           currency={currency}

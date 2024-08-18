@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import currencyStore from '../../state/store';
 import { useNavigate } from "react-router-dom";
 import PageLoader from "../PageLoader/PageLoader";
+import { longDecimalToShort, numToCrConvert } from "../util/util";
 function CoinTable() {
 
     const { currency } = currencyStore();
@@ -33,7 +34,7 @@ function CoinTable() {
     }
     
     return (
-        <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
+        <div className="my-5 flex flex-col items-center justify-center gap-5 w-[95vw] md:w-[80vw] mx-auto">
             <div className="w-full bg-yellow-400 text-black flex py-4 px-2 font-semibold items-center justify-center">
                 {/* Header of the table */}
                 <div className="basis-[35%]">
@@ -50,19 +51,19 @@ function CoinTable() {
                 </div>
             </div>
 
-            <div className="flex flex-col w-[80vw] mx-auto">
+            <div className="flex flex-col w-[95vw] md:w-[80vw] mx-auto">
                 {isLoading && <div>Loading...</div>}
                 {data && data.map((coin) => {
                     return (
                         <div onClick={() => handleCoinRedirect(coin.id)} key={coin.id} className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between cursor-pointer">
                             <div className="flex items-center justify-start gap-3 basis-[35%]">
 
-                                <div className="w-[5rem] h-[5rem]">
+                                <div className="w-[3rem] h-[3rem] md:w-[5rem] md:h-[5rem]">
                                     <img src={coin.image} className="w-full h-full" loading="lazy"/>
                                 </div>
 
                                 <div className="flex flex-col"> 
-                                    <div className="text-3xl">{coin.name}</div>
+                                    <div className="text-lg md:text-3xl">{coin.name}</div>
                                     <div className="text-xl">{coin.symbol}</div>
                                 </div>
 
@@ -73,10 +74,10 @@ function CoinTable() {
                                 {coin.current_price}
                             </div>
                             <div className="basis-[20%]">
-                                {coin.price_change_24h}
+                                ~ {longDecimalToShort(coin.price_change_24h)}
                             </div>
                             <div className="basis-[20%]">
-                                {coin.market_cap}
+                                {numToCrConvert(coin.market_cap)} Cr.
                             </div>
                         </div>
                     );
@@ -87,13 +88,13 @@ function CoinTable() {
                 <button
                     disabled={page === 1}
                     onClick={() => setPage(page-1)} 
-                    className="btn btn-primary btn-wide text-white text-2xl"
+                    className="btn btn-primary md:btn-wide text-white text-2xl"
                 >
                     Prev
                 </button>
                 <button 
                     onClick={() => setPage(page+1)} 
-                    className="btn btn-secondary btn-wide text-white text-2xl"
+                    className="btn btn-secondary md:btn-wide text-white text-2xl"
                 >
                     Next
                 </button>

@@ -10,7 +10,7 @@ function CoinDashboard({ coinId, currency, cardData }) {
   let [days, setDays] = useState(1);
 
   const { data, isError, isLoading } = useQuery(
-    ["chartData", currency, days],
+    ["chartData", coinId, currency, days],
     () => fetchCoinChartData(coinId, currency, days),
     {
       cacheTime: 1000 * 60 * 2,
@@ -59,7 +59,7 @@ function CoinDashboard({ coinId, currency, cardData }) {
 
 
   return (
-    <div className="main-container p-5">
+    <div className="main-container p-1 md:p-5">
       <div className="w-full mb-4 ">
         <CoinDetailCard cardData={cardData} />
       </div>
