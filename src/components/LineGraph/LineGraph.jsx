@@ -62,7 +62,7 @@ function LineGraph({ dataArray, currency }){
                 display: true,
                 title: {
                     display: true,
-                    text: 'Value', 
+                    text: 'Price', 
                     color: 'white', 
                 },
                 grid: {
