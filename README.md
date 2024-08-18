@@ -8,6 +8,13 @@ The Cryptocurrency Tracker App is a robust, user-friendly application built with
 
 <a style="font-size:1.5rem;" href="https://crypto-project-coin-gecko-topaz.vercel.app">Live Website</a>
 
+## Table of Contents
+- [Features](#features)
+- [Preview](#preview)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+
 ## Features
 - Home Page displays a table of cryptocurrencies with images, names, prices, 24-hour changes, and market cap.
 - Currency Selector to toggle between USD and INR for displaying data.
@@ -27,6 +34,16 @@ The Cryptocurrency Tracker App is a robust, user-friendly application built with
 
 **Coin Detail Page**
 <img src="./public/coinPagePreview.png">
+
+
+## Tech Stack
+- **Frontend**: React.js, DaisyUI, Zustand, Chart.js 2
+- **API**: CoinGecko Free API
+- **State Management**: Zustand
+- **API Caching**: React Query
+- **Patterns**: Presenter-Container, Custom Hooks
+- **Performance**: Suspense, Error Boundaries, Lazy Loading
+
 
 
 ## Getting Started
