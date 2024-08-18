@@ -1,22 +1,15 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { fetchCoinChartData } from "../../services/fetchCoinChartData";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import CoinDetailCard from "./CoinDetailCard";
+import useFetchCoinDashboardData from "../../hooks/useFetchCoinDashboardData";
 
 function CoinDashboard({ coinId, currency, cardData }) {
-  let [days, setDays] = useState(1);
-
-  const { data, isError, isLoading } = useQuery(
-    ["chartData", coinId, currency, days],
-    () => fetchCoinChartData(coinId, currency, days),
-    {
-      cacheTime: 1000 * 60 * 2,
-      staleTime: 1000 * 60 * 2,
-    }
+  let { data, days, setDays, isError, isLoading } = useFetchCoinDashboardData(
+    coinId,
+    currency
   );
+
   if (isLoading) {
     return (
       <div className="flex flex-col gap-6">
@@ -56,7 +49,6 @@ function CoinDashboard({ coinId, currency, cardData }) {
     let priceData = arr.map((item) => item[1]);
     return priceData;
   }
-
 
   return (
     <div className="main-container p-1 md:p-5">
@@ -165,7 +157,6 @@ function CoinDashboard({ coinId, currency, cardData }) {
 
           {data.total_volumes ? (
             <>
-
               <Line
                 data={{
                   labels: getPriceLabels(data.total_volumes),
