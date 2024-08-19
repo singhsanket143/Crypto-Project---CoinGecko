@@ -15,7 +15,7 @@ const data  = {
 
 function SearhItem({coinData = data, key}) {
   return (
-    <li className='mb-2' key={key}>
+    <li className='mb-2 w-full' key={key}>
         <a className='h-12 flex items-center justify-between'>
             <img src={coinData.thumb} alt={coinData.name} />
             <p className='font-semibold'>{coinData.name} - <span className='font-thin'>{coinData.symbol}</span></p>

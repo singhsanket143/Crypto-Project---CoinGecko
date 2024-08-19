@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
 import "./SearchBox.css"
 import SearhItem from "./SearhItem";
-import { useQuery } from "react-query";
-import { fetchSearchData } from "../../services/fetchSearchData";
+import useFetchSearchData from "../../hooks/useFetchSearchData";
 function SearchBox() {
 
 
-  let [searchResult, setSearchResult] = useState(["whta"]);
-  let [searchText, setSearchText] = useState("");
-  const {data, isError, isLoading, error} = useQuery(["searchData", searchText], () => fetchSearchData(searchText), {
-    cacheTime: 1000 * 60 * 2,
-    staleTime: 1000 * 60 * 2,
-  })
+  let {data, isLoading, isError, error, setSearchText} = useFetchSearchData()
 
 
 
@@ -28,11 +21,11 @@ function SearchBox() {
       />
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-base-200 mt-3 rounded-box z-[1] w-80 p-2 shadow"
+          className="dropdown-content menu flex flex-col justify-center items-center bg-base-200 mt-3 rounded-box z-[1] w-72 md:w-80 left-[-160px] p-2 shadow"
         >
           {isLoading && <span className="loading loading-dots loading-lg"></span>}
           {isError && <span>{error}</span>}
-          {data ? data.map(item => <SearhItem coinData={item} key={item.id}/>) : <li><a>Nothing</a></li>}
+          {data && data?.map(item => <SearhItem coinData={item} key={item.id}/>)}
         </ul>
       </div>
    
