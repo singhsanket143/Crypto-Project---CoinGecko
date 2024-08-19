@@ -1,10 +1,14 @@
 import "./SearchBox.css"
 import SearhItem from "./SearhItem";
 import useFetchSearchData from "../../hooks/useFetchSearchData";
+import { useEffect } from "react";
 function SearchBox() {
 
 
-  let {data, isLoading, isError, error, setSearchText} = useFetchSearchData()
+  let {data, isLoading, isError, error, setSearchText, searchText} = useFetchSearchData()
+  useEffect(() => {
+    console.log(data);
+  }, [data])
 
 
 
@@ -16,6 +20,7 @@ function SearchBox() {
         role="button"
         type="text"
         placeholder="Search"
+        value={searchText}
         className="input input-bordered w-24 md:w-auto"
         onChange={(e)=> {setSearchText(e.target.value)}}
       />
@@ -25,7 +30,8 @@ function SearchBox() {
         >
           {isLoading && <span className="loading loading-dots loading-lg"></span>}
           {isError && <span>{error}</span>}
-          {data && data?.map(item => <SearhItem coinData={item} key={item.id}/>)}
+          {(data &&  data.length == 0) && <li>No Suggestion</li>}
+          {data && data?.map(item => <div className='mb-2 w-full' key={item.id}><SearhItem setSearchText={setSearchText} coinData={item}/></div>)}
         </ul>
       </div>
    

@@ -14,17 +14,18 @@ const data  = {
 
 
 
-function SearhItem({coinData = data, key}) {
+function SearhItem({coinData = data, setSearchText}) {
 
     const navigate = useNavigate();
 
 
     function handleCoinRedirect(id) {
+      setSearchText("");
         navigate(`/details/${id}`);
     }
 
   return (
-    <li className='mb-2 w-full' key={key} onClick={() => handleCoinRedirect(coinData.id)}>
+    <li className=' w-full' onClick={() => handleCoinRedirect(coinData.id)}>
         <a className='h-12 flex items-center justify-between'>
             <img src={coinData.thumb} alt={coinData.name} />
             <p className='font-semibold'>{coinData.name} - <span className='font-thin'>{coinData.symbol}</span></p>

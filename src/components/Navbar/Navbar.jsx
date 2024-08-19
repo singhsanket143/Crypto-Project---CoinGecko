@@ -5,6 +5,7 @@ import currencyStore from  '../../state/store';
 import SearchBox from '../SearchBox/SearchBox';
 import xmark from "../../assets/xmark.svg"
 import { useState } from 'react';
+import ThemeSwapBtn from '../ThemeSwapBtn/ThemeSwapBtn';
 function Navbar() {
 
     const { setCurrency } = currencyStore();
@@ -17,7 +18,7 @@ function Navbar() {
 
     return (
         <div className="navbar bg-base-100">
-            <div className="navbar-start">
+            <div className="navbar-start gap-1">
                 <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                     <svg
@@ -40,9 +41,10 @@ function Navbar() {
                     <li ><a onClick={() => setCurrency('usd')}>USD</a></li>
                 </ul>
                 </div>
+                <ThemeSwapBtn/>
             </div>
             <div onClick={goToHome} className="navbar-center">
-                <a className="btn btn-ghost text-xl">Crpto Tracker</a>
+                <a className="btn btn-ghost text-base md:text-xl">Crpto Tracker</a>
             </div>
             <div className="navbar-end flex gap-1 md:gap-4">
             {searchBox && <SearchBox/>}
