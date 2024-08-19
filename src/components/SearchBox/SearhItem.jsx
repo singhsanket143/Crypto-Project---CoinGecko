@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 const data  = {
@@ -14,8 +15,16 @@ const data  = {
 
 
 function SearhItem({coinData = data, key}) {
+
+    const navigate = useNavigate();
+
+
+    function handleCoinRedirect(id) {
+        navigate(`/details/${id}`);
+    }
+
   return (
-    <li className='mb-2 w-full' key={key}>
+    <li className='mb-2 w-full' key={key} onClick={() => handleCoinRedirect(coinData.id)}>
         <a className='h-12 flex items-center justify-between'>
             <img src={coinData.thumb} alt={coinData.name} />
             <p className='font-semibold'>{coinData.name} - <span className='font-thin'>{coinData.symbol}</span></p>
