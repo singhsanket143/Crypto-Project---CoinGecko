@@ -27,13 +27,21 @@ The Cryptocurrency Tracker App is a robust, user-friendly application built with
 - API Caching done using React Query.
 - Responsive Design powered by DaisyUI.
 - Performance Optimization with features like lazy loading, suspense, and error boundaries.
+- Search box with suggestion functionality and implimented debounce.
+- Crypto Compare functionality compare two coins.
 
 ## Preview
 **Home Page**
 <img src="./public/desktop-preview.png">
 
-**Coin Detail Page**
+**Crypto Detail Page**
 <img src="./public/coinPagePreview.png">
+
+**Crypto coin Search**
+<img src="./public/search-suggestion-functionality.png">
+
+**Coin Compare**
+<img src="./public/Coin-Comapre.png">
 
 
 ## Tech Stack
