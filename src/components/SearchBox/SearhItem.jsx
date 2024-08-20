@@ -14,12 +14,15 @@ const data  = {
 
 
 
-function SearhItem({coinData = data, setSearchText}) {
+function SearhItem({coinData = data, setSearchText, eventDisabled = false}) {
 
     const navigate = useNavigate();
 
 
     function handleCoinRedirect(id) {
+      if (eventDisabled){
+        return;
+      }
       setSearchText("");
         navigate(`/details/${id}`);
     }
@@ -27,7 +30,7 @@ function SearhItem({coinData = data, setSearchText}) {
   return (
     <li className=' w-full' onClick={() => handleCoinRedirect(coinData.id)}>
         <a className='h-12 flex items-center justify-between'>
-            <img src={coinData.thumb} alt={coinData.name} />
+            <img src={coinData.thumb} className='h-8' alt={coinData.name} />
             <p className='font-semibold'>{coinData.name} - <span className='font-thin'>{coinData.symbol}</span></p>
             <p className='text-yellow-500'>👑{coinData.market_cap_rank}</p>
         </a>

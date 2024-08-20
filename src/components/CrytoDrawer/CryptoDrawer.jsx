@@ -1,6 +1,7 @@
 import React from "react";
+import SearhItem from "../SearchBox/SearhItem";
 
-function CryptoDrawer() {
+function CryptoDrawer({disable, comapareCoinsData}) {
   return (
     <div>
       <div className="drawer drawer-end">
@@ -9,7 +10,7 @@ function CryptoDrawer() {
           {/* Page content here */}
           <label
             htmlFor="my-drawer-4"
-            className="drawer-button btn btn-primary"
+            className={`drawer-button btn btn-primary ${disable ? "btn-disabled" : ""}`}
           >
             Compare Crypto
           </label>
@@ -22,12 +23,7 @@ function CryptoDrawer() {
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 gap-3 pr-6">
             {/* Sidebar content here */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
+            {comapareCoinsData?.map(coin => <SearhItem key={coin.id} coinData={coin} eventDisabled={true}/>)}
           <button className="btn btn-outline h-6 p-2 btn-warning">Compare</button>
           </ul>
         </div>
