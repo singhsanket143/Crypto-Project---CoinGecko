@@ -4,6 +4,7 @@ import { longDecimalToShort, numToCrConvert } from "../util/util";
 import axiosInstance from "../../helpers/axiosInstance";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
+import CryptoDrawer from "../CrytoDrawer/CryptoDrawer";
 
 function CoinTable() {
 
@@ -35,10 +36,11 @@ function CoinTable() {
         loader={<div className="w-full grid place-content-center pb-3"><span className="loading loading-spinner loading-lg"></span></div>}
       >
         <div className="my-5 flex flex-col items-center justify-center gap-5 w-[95vw] md:w-[80vw] mx-auto">
-            <div className="w-full bg-yellow-400 flex py-4 px-2 font-semibold items-center justify-center">
+            <div className="w-full text-black bg-yellow-400 flex py-4 px-2 font-semibold items-center justify-center">
                 {/* Header of the table */}
-                <div className="basis-[35%]">
-                    Coin 
+                <div className="basis-[35%] flex gap-2 items-center">
+                    <p>Coin</p> 
+                    {<CryptoDrawer/>}
                 </div>
                 <div  className="basis-[25%]">
                     Price 
