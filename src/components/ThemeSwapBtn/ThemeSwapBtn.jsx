@@ -6,7 +6,13 @@ function ThemeSwapBtn() {
     let [checked, setChecked] = useState(false);
     // let [theme, setTheme] = useState(localStorage.getItem("theme") || "forest");
     useEffect(() => {
-        console.log(checked)
+      const htmlEle = document.getElementsByTagName("html");
+        if (checked){
+          htmlEle[0].setAttribute("data-theme", "light");
+        }
+        else{
+          htmlEle[0].setAttribute("data-theme", "forest");
+        }
     }, [checked])
 
   return (

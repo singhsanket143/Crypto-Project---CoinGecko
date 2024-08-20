@@ -1,41 +1,41 @@
-import { useState } from "react";
-import { fetchCoinData } from "../../services/fetchCoinData";
-import { useQuery } from "react-query";
-// import { CurrencyContext } from "../../context/CurrencyContext";
-import currencyStore from '../../state/store';
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageLoader from "../PageLoader/PageLoader";
 import { longDecimalToShort, numToCrConvert } from "../util/util";
-function CoinTable() {
+import axiosInstance from "../../helpers/axiosInstance";
+import InfiniteScroll from "react-infinite-scroll-component";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
-    const { currency } = currencyStore();
+function CoinTable() {
 
     const navigate = useNavigate();
 
-    const [page, setPage] = useState(1);
-    const { data, isLoading, isError, error} = useQuery(['coins', page, currency], () => fetchCoinData(page, currency), {
-        // retry: 2,
-        // retryDelay: 1000,
-        cacheTime: 1000 * 60 * 2,
-        staleTime: 1000 * 60 * 2,
-    });
+    let {tableData, setTableData, currency, hasMore, fetchMore} = useInfiniteScroll();
 
+
+    useEffect(() => {
+        setTableData([]);
+        axiosInstance.get(`/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=1`)
+        .then((res) => setTableData(res.data))
+        .catch((err) => console.log(err));
+    }, [currency])
+
+
+
+ 
 
     function handleCoinRedirect(id) {
         navigate(`/details/${id}`);
     }
 
-    if(isError) {
-        return <div>Error: {error.message}</div>;
-    }
-
-    if(isLoading) {
-        return <PageLoader />
-    }
-    
     return (
+        <InfiniteScroll
+        dataLength={tableData.length}
+        next={fetchMore}
+        hasMore={hasMore}
+        loader={<div className="w-full grid place-content-center pb-3"><span className="loading loading-spinner loading-lg"></span></div>}
+      >
         <div className="my-5 flex flex-col items-center justify-center gap-5 w-[95vw] md:w-[80vw] mx-auto">
-            <div className="w-full bg-yellow-400 text-black flex py-4 px-2 font-semibold items-center justify-center">
+            <div className="w-full bg-yellow-400 flex py-4 px-2 font-semibold items-center justify-center">
                 {/* Header of the table */}
                 <div className="basis-[35%]">
                     Coin 
@@ -52,10 +52,9 @@ function CoinTable() {
             </div>
 
             <div className="flex flex-col w-[95vw] md:w-[80vw] mx-auto">
-                {isLoading && <div>Loading...</div>}
-                {data && data.map((coin) => {
+                {tableData && tableData.map((coin) => {
                     return (
-                        <div onClick={() => handleCoinRedirect(coin.id)} key={coin.id} className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between cursor-pointer">
+                        <div onClick={() => handleCoinRedirect(coin.id)} key={coin.id} className="w-full bg-transparent flex py-4 px-2 font-semibold items-center justify-between cursor-pointer">
                             <div className="flex items-center justify-start gap-3 basis-[35%]">
 
                                 <div className="w-[3rem] h-[3rem] md:w-[5rem] md:h-[5rem]">
@@ -83,23 +82,8 @@ function CoinTable() {
                     );
                 })}
             </div>
-
-            <div className="flex gap-4 justify-center items-center">
-                <button
-                    disabled={page === 1}
-                    onClick={() => setPage(page-1)} 
-                    className="btn btn-primary md:btn-wide text-white text-2xl"
-                >
-                    Prev
-                </button>
-                <button 
-                    onClick={() => setPage(page+1)} 
-                    className="btn btn-secondary md:btn-wide text-white text-2xl"
-                >
-                    Next
-                </button>
-            </div>
         </div>
+        </InfiniteScroll>
     )
 }
 

@@ -10,7 +10,7 @@ function CoinDetailCard({ cardData }) {
   return (
     <>
       {cardData ? (
-        <div className="w-full h-full  text-white gap-3 grid grid-cols-2 md:grid-cols-3 p-2 ">
+        <div className="w-full h-full gap-3 grid grid-cols-2 md:grid-cols-3 p-2 ">
           <div className="bg-[#ffcc6d8a] p-3 h-fit flex flex-col gap-1 font-bold rounded-md">
             <h2>Market Cap</h2>
             <p className="font-thin text-xl">{currency == "usd" ? "$" : "₹"}{cardData.marketCap}</p>
