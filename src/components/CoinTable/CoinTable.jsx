@@ -53,7 +53,7 @@ function CoinTable() {
           {/* Header of the table */}
           <div className="basis-[35%] flex gap-2 items-center">
             <p>Coin</p>
-            <CryptoDrawer comapareCoinsData={compareCoins} disable={compareCoins.length < 2} />
+            <CryptoDrawer comapareCoinsData={compareCoins} setCompareCoins={setCompareCoins} disable={compareCoins.length < 2} />
           </div>
           <div className="basis-[25%]">Price</div>
           <div className="basis-[20%]">24h change</div>

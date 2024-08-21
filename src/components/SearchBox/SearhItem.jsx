@@ -14,13 +14,13 @@ const data  = {
 
 
 
-function SearhItem({coinData = data, setSearchText, eventDisabled = false}) {
+function SearhItem({coinData = data, setSearchText, compareItem = false, deleteCoinFn}) {
 
     const navigate = useNavigate();
 
 
     function handleCoinRedirect(id) {
-      if (eventDisabled){
+      if (compareItem){
         return;
       }
       setSearchText("");
@@ -33,6 +33,7 @@ function SearhItem({coinData = data, setSearchText, eventDisabled = false}) {
             <img src={coinData.thumb} className='h-8' alt={coinData.name} />
             <p className='font-semibold'>{coinData.name} - <span className='font-thin'>{coinData.symbol}</span></p>
             <p className='text-yellow-500'>👑{coinData.market_cap_rank}</p>
+            {compareItem && <button className="btn btn-square btn-sm" onClick={() => deleteCoinFn(coinData.id)}>🗑️</button>}
         </a>
     </li>
   )
