@@ -1,12 +1,22 @@
 import React from "react";
 import SearhItem from "../SearchBox/SearhItem";
+import { useNavigate } from "react-router-dom";
 
 function CryptoDrawer({disable, comapareCoinsData, setCompareCoins}) {
+  
+  const navigator = useNavigate();
 
   function deleteCoin (id){
    const newCompareCoinData =  comapareCoinsData.filter(coin => coin.id !== id);
    setCompareCoins(newCompareCoinData);
   }
+
+  function goToComaprePage(coinData){
+    const coinIds = coinData.map(coin => coin.id);
+    navigator(`/compare/${coinIds[0]}VS${coinIds[1]}`, {state: coinIds});
+  }
+  
+
 
   return (
     <div>
@@ -30,7 +40,7 @@ function CryptoDrawer({disable, comapareCoinsData, setCompareCoins}) {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 gap-3 pr-6">
             {/* Sidebar content here */}
             {comapareCoinsData?.map(coin => <SearhItem deleteCoinFn={deleteCoin} key={coin.id} coinData={coin} compareItem={true}/>)}
-          <button className="btn btn-outline h-6 p-2 btn-warning" disabled={disable}>Compare</button>
+          <button className="btn btn-outline h-6 p-2 btn-warning" onClick={() => goToComaprePage(comapareCoinsData)} disabled={disable}>Compare</button>
           </ul>
         </div>
       </div>
