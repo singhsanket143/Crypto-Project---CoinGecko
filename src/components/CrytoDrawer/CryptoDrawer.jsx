@@ -26,7 +26,7 @@ function CryptoDrawer({disable, comapareCoinsData, setCompareCoins}) {
           {/* Page content here */}
           <label
             htmlFor="my-drawer-4"
-            className={`drawer-button btn btn-primary ${disable ? "btn-disabled" : ""}`}
+            className={`drawer-button btn btn-primary fixed bottom-8 right-4 ${disable ? "btn-disabled" : ""}`}
           >
             Compare Crypto
           </label>

@@ -84,7 +84,7 @@ function CoinTable() {
                     <button
                     disabled={compareCoins.length >= 2}
                       onClick={(e) => addToCompareOnClick(e, coin)}
-                      className="leading-none h-4 px-4 grid place-content-center rounded-2xl bg-yellow-700 text-white text-xs"
+                      className="leading-none whitespace-nowrap h-4 w-fit px-1 grid place-content-center rounded-2xl bg-yellow-700 text-white text-xs"
                     >
                       Add to compare
                     </button>
