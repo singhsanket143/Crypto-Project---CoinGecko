@@ -82,6 +82,7 @@ function CoinTable() {
                   <div className="text-xl font-light flex items-center gap-1">
                     <p>{coin.symbol}</p>
                     <button
+                    disabled={compareCoins.length >= 2}
                       onClick={(e) => addToCompareOnClick(e, coin)}
                       className="leading-none h-4 px-4 grid place-content-center rounded-2xl bg-yellow-700 text-white text-xs"
                     >
