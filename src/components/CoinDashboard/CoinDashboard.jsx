@@ -3,6 +3,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import CoinDetailCard from "./CoinDetailCard";
 import useFetchCoinDashboardData from "../../hooks/useFetchCoinDashboardData";
+import { getPriceData, getPriceLabels } from "../util/util";
 
 function CoinDashboard({ coinId, currency, cardData }) {
   let { data, days, setDays, isError, isLoading } = useFetchCoinDashboardData(
@@ -24,31 +25,7 @@ function CoinDashboard({ coinId, currency, cardData }) {
     return <div>Error</div>;
   }
 
-  function getTime(date) {
-    let hour = date.getHours();
-    let munutes = date.getMinutes().toString().padStart(2, "0");
-    let timeString = `${hour} : ${munutes} AM`;
-    if (hour > 12) {
-      timeString = `${(hour - 12).toString().padStart(2, "0")} : ${munutes} PM`;
-    }
 
-    return timeString;
-  }
-
-  function getPriceLabels(arr) {
-    const labels = arr.map((item) => {
-      let date = new Date(item[0]);
-      let time = getTime(date);
-      return days == 1 ? time : date.toLocaleDateString();
-    });
-
-    return labels;
-  }
-
-  function getPriceData(arr) {
-    let priceData = arr.map((item) => item[1]);
-    return priceData;
-  }
 
   return (
     <div className="main-container p-1 md:p-5">
@@ -90,7 +67,7 @@ function CoinDashboard({ coinId, currency, cardData }) {
             <>
               <Line
                 data={{
-                  labels: getPriceLabels(data.prices),
+                  labels: getPriceLabels(data.prices, days),
                   datasets: [
                     {
                       data: getPriceData(data.prices),
@@ -123,7 +100,7 @@ function CoinDashboard({ coinId, currency, cardData }) {
 
               <Line
                 data={{
-                  labels: getPriceLabels(data.market_caps),
+                  labels: getPriceLabels(data.market_caps, days),
                   datasets: [
                     {
                       data: getPriceData(data.market_caps),
@@ -159,7 +136,7 @@ function CoinDashboard({ coinId, currency, cardData }) {
             <>
               <Line
                 data={{
-                  labels: getPriceLabels(data.total_volumes),
+                  labels: getPriceLabels(data.total_volumes, days),
                   datasets: [
                     {
                       data: getPriceData(data.total_volumes),
